@@ -1,6 +1,7 @@
 package com.quicknotes.dao;
 
 import com.quicknotes.model.Note;
+import com.quicknotes.model.User;
 import com.quicknotes.util.DBConnection;
 
 import java.sql.Connection;
@@ -97,4 +98,6 @@ public class NoteDAO {
             e.printStackTrace();
         }
     }
+
+
 }

@@ -1,6 +1,18 @@
+<%
+if (session.getAttribute("user") == null) {
+    response.sendRedirect(request.getContextPath() + "/login");
+    return;
+}
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <title>Add Note</title>
 
     <!-- TinyMCE -->
@@ -22,19 +34,26 @@
     </script>
 
 </head>
-<body>
+<body><div class="container mt-4">
+          <h3>Add Note</h3>
 
-<h2>Add Note</h2>
+          <form action="<%=request.getContextPath()%>/add-note" method="post"
+                onsubmit="tinymce.triggerSave();">
 
-<form action="<%=request.getContextPath()%>/add-note" method="post">
-    Title:<br/>
-    <input type="text" name="title" required /><br/><br/>
+              <div class="mb-3">
+                  <label class="form-label">Title</label>
+                  <input type="text" name="title" class="form-control" required>
+              </div>
 
-    Content:<br/>
-    <textarea name="content" rows="8" cols="40" required></textarea><br/><br/>
+              <div class="mb-3">
+                  <label class="form-label">Content</label>
+                  <textarea name="content"></textarea>
+              </div>
 
-    <input type="submit" value="Save Note"/>
-</form>
+              <button type="submit" class="btn btn-primary">Save</button>
+              <a href="<%=request.getContextPath()%>/notes" class="btn btn-secondary">Cancel</a>
+          </form>
+      </div>
 
 </body>
 </html>
