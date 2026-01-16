@@ -19,6 +19,6 @@ public class DeleteNoteServlet extends HttpServlet {
         NoteDAO dao = new NoteDAO();
         dao.softDeleteNote(id);
 
-        resp.sendRedirect(req.getContextPath()+"/notes");
+        resp.sendRedirect(req.getContextPath()+"/notes?msg=deleted");
     }
 }

@@ -20,12 +20,14 @@ public class LoginServlet extends HttpServlet {
 
         req.getRequestDispatcher("/jsp/login.jsp").forward(req, resp);
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String username = req.getParameter("username");
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
 
         UserDAO dao = new UserDAO();
-        User user = dao.findByUsername(username);
+        User user = dao.validate(email, password);
 
         if (user == null) {
             req.setAttribute("error", "Invalid username");
@@ -36,7 +38,7 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
 
-        resp.sendRedirect(req.getContextPath() + "/notes");
+        resp.sendRedirect(req.getContextPath() + "/notes?msg=success");
 
     }
 }

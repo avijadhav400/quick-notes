@@ -25,6 +25,6 @@ public class UpdateNoteServlet extends HttpServlet {
         NoteDAO dao = new NoteDAO();
         dao.updateNote(noteId, title, content);
 
-        resp.sendRedirect(req.getContextPath() + "/notes");
+        resp.sendRedirect(req.getContextPath() + "/notes?msg=updated");
     }
 }
